@@ -3,13 +3,13 @@ package br.com.felipe.entity;
 public class Book {
 	private String title;
 	private String author;
-	private String pubYear;
+	private int pubYear;
 
 	public Book() {
 		super();
 	}
 
-	public Book(String title, String author, String pubYear) {
+	public Book(String title, String author, int pubYear) {
 		this.title = title;
 		this.author = author;
 		this.pubYear = pubYear;
@@ -31,16 +31,16 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getPubYear() {
+	public int getPubYear() {
 		return pubYear;
 	}
 
-	public void setPubYear(String pubYear) {
+	public void setPubYear(int pubYear) {
 		this.pubYear = pubYear;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", pubYear=" + pubYear + "]";
+		return "Título: " + title + ", Autor: " + author + ", Ano de Publicação: " + pubYear + "";
 	}
 }
