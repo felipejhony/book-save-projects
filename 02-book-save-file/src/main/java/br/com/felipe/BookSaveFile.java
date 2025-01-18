@@ -3,7 +3,7 @@ package br.com.felipe;
 import br.com.felipe.service.BookService;
 import br.com.felipe.ui.UiConsole;
 
-public class Main {
+public class BookSaveFile{
 
 	public static void main(String[] args) {
 

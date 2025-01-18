@@ -1,19 +1,20 @@
 package br.com.felipe.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import br.com.felipe.dto.BookDto;
 import br.com.felipe.entity.Book;
+import br.com.felipe.file.BookFile;
 import br.com.felipe.ui.UiConsole;
 
 public class BookService {
 
 	// create list of Books
-	private static List<Book> books = new ArrayList<>();
 
 	public static void show() {
-
+		
+		List<Book> books = BookFile.getBooks();
 		if (books.isEmpty())
 			System.out.println("A coleção de livros está vazia.");
 		else
@@ -32,56 +33,58 @@ public class BookService {
 		int pubYear = UiConsole.getInt();
 
 		Book newBook = new Book(title, author, pubYear);
-		books.add(newBook);
 		System.out.println("Livro adicionado!");
+		
+		BookFile.addBook(newBook);
 	}
 
 	public static void update() {
 
-		Book book = getBook();
+		BookDto bookDto = getBook();
 
-		if (book == null)
+		if (bookDto == null)
 			return;
 
-		System.out.println("Informe o título do livro ou vazio para manter " + book.getTitle());
+		System.out.println("Informe o título do livro ou vazio para manter " + bookDto.getBook().getTitle());
 
 		String title = UiConsole.getString();
 		if (title != null && !title.isEmpty())
-			book.setTitle(title);
+			bookDto.getBook().setTitle(title);
 
-		System.out.println("Informe o autor do livro ou vazio para manter " + book.getAuthor());
+		System.out.println("Informe o autor do livro ou vazio para manter " + bookDto.getBook().getAuthor());
 		String author = UiConsole.getString();
 		if (author != null && !author.isEmpty())
-			book.setAuthor(author);
+			bookDto.getBook().setAuthor(author);
 
-		System.out.println("Informe o ano de publicação do livro ou 0 (ZERO) para manter " + book.getPubYear());
+		System.out.println("Informe o ano de publicação do livro ou 0 (ZERO) para manter " + bookDto.getBook().getPubYear());
 		int pubYear = UiConsole.getInt();
 		if (pubYear > 0)
-			book.setPubYear(pubYear);
+			bookDto.getBook().setPubYear(pubYear);
 
+		BookFile.updateBook(bookDto.getIndex(), bookDto.getBook());
 		System.out.println("Livro alterado!");
 	}
 
 	public static void delete() {
 
-		Book book = getBook();
+		BookDto bookDto = getBook();
 
-		if (book == null)
+		if (bookDto.getIndex() == -1)
 			return;
 
-		books.remove(book);
+		BookFile.deleteBook(bookDto.getIndex());
 
 		System.out.println("Livro removido!");
 
 	}
 
-	private static Book getBook() {
+	private static BookDto getBook() {
 		int indice = 0;
 		Book book = null;
 
 		while (book == null) {
 			
-			System.out.println("Informe o índice do livro para alterar ou 0 para cancelar:");
+			System.out.println("Informe o índice do livro desejado ou 0 para cancelar:");
 			
 			indice = UiConsole.getInt();
 			
@@ -89,6 +92,7 @@ public class BookService {
 				return null;
 			
 			try {
+				List<Book> books = BookFile.getBooks();
 				
 				book = books.get(indice - 1);
 				System.out.println("Índice: " + (indice) + ", Livro: " + book.toString());
@@ -98,7 +102,7 @@ public class BookService {
 				System.out.println("==============================================================================");
 			}
 		}
-		return book;
+		return new BookDto(book, indice - 1);
 	}
 
 }
