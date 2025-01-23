@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+	private int id;
 	private String title;
 	private String author;
 	private int pubYear;
@@ -44,6 +44,14 @@ public class Book implements Serializable {
 		this.pubYear = pubYear;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
 		return "Título: " + title + ", Autor: " + author + ", Ano de Publicação: " + pubYear + "";

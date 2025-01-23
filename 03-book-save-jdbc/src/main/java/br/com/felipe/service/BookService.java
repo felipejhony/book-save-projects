@@ -3,18 +3,20 @@ package br.com.felipe.service;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import br.com.felipe.dao.BookDAO;
 import br.com.felipe.dto.BookDto;
 import br.com.felipe.entity.Book;
-import br.com.felipe.file.BookFile;
 import br.com.felipe.ui.UiConsole;
 
 public class BookService {
 
 	// create list of Books
 
+	static BookDAO bookDAO = new BookDAO();
+	
 	public static void show() {
 		
-		List<Book> books = BookFile.getBooks();
+		List<Book> books = bookDAO.getBooks();
 		if (books.isEmpty())
 			System.out.println("A coleção de livros está vazia.");
 		else
@@ -35,7 +37,7 @@ public class BookService {
 		Book newBook = new Book(title, author, pubYear);
 		System.out.println("Livro adicionado!");
 		
-		BookFile.addBook(newBook);
+		bookDAO.addBook(newBook);
 	}
 
 	public static void update() {
@@ -61,7 +63,7 @@ public class BookService {
 		if (pubYear > 0)
 			bookDto.getBook().setPubYear(pubYear);
 
-		BookFile.updateBook(bookDto.getIndex(), bookDto.getBook());
+		bookDAO.updateBook(bookDto.getIndex(), bookDto.getBook());
 		System.out.println("Livro alterado!");
 	}
 
@@ -72,7 +74,7 @@ public class BookService {
 		if (bookDto.getIndex() == -1)
 			return;
 
-		BookFile.deleteBook(bookDto.getIndex());
+		bookDAO.deleteBook(bookDto.getIndex());
 
 		System.out.println("Livro removido!");
 
@@ -92,7 +94,7 @@ public class BookService {
 				return null;
 			
 			try {
-				List<Book> books = BookFile.getBooks();
+				List<Book> books = bookDAO.getBooks();
 				
 				book = books.get(indice - 1);
 				System.out.println("Índice: " + (indice) + ", Livro: " + book.toString());
