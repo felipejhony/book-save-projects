@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import br.com.felipe.dao.BookDAO;
-import br.com.felipe.dto.BookDto;
+import br.com.felipe.dto.BookDTO;
 import br.com.felipe.entity.Book;
 import br.com.felipe.ui.UiConsole;
 
@@ -42,7 +42,7 @@ public class BookService {
 
 	public static void update() {
 
-		BookDto bookDto = getBook();
+		BookDTO bookDto = getBook();
 
 		if (bookDto == null)
 			return;
@@ -69,7 +69,7 @@ public class BookService {
 
 	public static void delete() {
 
-		BookDto bookDto = getBook();
+		BookDTO bookDto = getBook();
 
 		if (bookDto.getIndex() == -1)
 			return;
@@ -80,7 +80,7 @@ public class BookService {
 
 	}
 
-	private static BookDto getBook() {
+	private static BookDTO getBook() {
 		int indice = 0;
 		Book book = null;
 
@@ -104,7 +104,7 @@ public class BookService {
 				System.out.println("==============================================================================");
 			}
 		}
-		return new BookDto(book, indice - 1);
+		return new BookDTO(book, indice - 1);
 	}
 
 }
