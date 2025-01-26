@@ -51,9 +51,10 @@ public class Book implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Título: " + title + ", Autor: " + author + ", Ano de Publicação: " + pubYear + "";
+		return "id: " + id + ", Titulo: " + title + ", Autor: " + author + ", Ano de Pub: " + pubYear;
 	}
+	
 }

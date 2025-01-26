@@ -10,8 +10,6 @@ import br.com.felipe.ui.UiConsole;
 
 public class BookService {
 
-	// create list of Books
-
 	static BookDAO bookDAO = new BookDAO();
 	
 	public static void show() {
@@ -71,7 +69,7 @@ public class BookService {
 
 		BookDTO bookDto = getBook();
 
-		if (bookDto.getIndex() == -1)
+		if (bookDto.getIndex() == 0)
 			return;
 
 		bookDAO.deleteBook(bookDto.getIndex());
@@ -104,7 +102,7 @@ public class BookService {
 				System.out.println("==============================================================================");
 			}
 		}
-		return new BookDTO(book, indice - 1);
+		return new BookDTO(book, indice);
 	}
 
 }

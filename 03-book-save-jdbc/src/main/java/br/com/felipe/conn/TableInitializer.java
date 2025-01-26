@@ -22,7 +22,6 @@ public class TableInitializer {
 			stmt.execute(dropTableSQL);
 			stmt.execute(createTableSQL);
 
-			System.out.println("Tabela 'books' criada ou já existe.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

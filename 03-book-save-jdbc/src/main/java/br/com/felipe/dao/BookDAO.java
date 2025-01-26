@@ -32,32 +32,46 @@ public class BookDAO {
 	}
 
 	public void deleteBook(int index) {
-		// TODO Auto-generated method stub
+		String insertSQL = "delete from books WHERE ID = ?";
+		try (Connection conn = DatabaseConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+			pstmt.setInt(1, index);
+			pstmt.executeUpdate();
+			System.out.println("Livro apagado com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	public void updateBook(int index, Book book) {
-		// TODO Auto-generated method stub
+		String insertSQL = "UPDATE books SET title = ? , author = ?, pub_year = ? WHERE ID = ?";
+		try (Connection conn = DatabaseConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+			pstmt.setString(1, book.getTitle());
+			pstmt.setString(2, book.getAuthor());
+			pstmt.setInt(3, book.getPubYear());
+			pstmt.setInt(4, index);
+			pstmt.executeUpdate();
+			System.out.println("Livro alterado com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
-	public void addBook(Book newBook) {
-		// TODO Auto-generated method stub
-
+	public void addBook(Book book) {
+		String insertSQL = "INSERT INTO books (title, author, pub_year) VALUES (?, ?, ?)";
+		try (Connection conn = DatabaseConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+			pstmt.setString(1, book.getTitle());
+			pstmt.setString(2, book.getAuthor());
+			pstmt.setInt(3, book.getPubYear());
+			pstmt.executeUpdate();
+			System.out.println("Livro salvo com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public void saveBook(Book book) {
-        String insertSQL = "INSERT INTO books (title, author, pub_year) VALUES (?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
-            pstmt.setString(1, book.getTitle());
-            pstmt.setString(2, book.getAuthor());
-            pstmt.setInt(3, book.getPubYear());
-            pstmt.executeUpdate();
-            System.out.println("Livro salvo com sucesso!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
