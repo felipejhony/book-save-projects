@@ -57,5 +57,13 @@ public class BookController {
 
 		return "books/book-form";
 	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam("bookId") int id) {
+		
+		bookService.deleteById(id);
+		
+		return "redirect:/books/list";
+	}
 
 }
