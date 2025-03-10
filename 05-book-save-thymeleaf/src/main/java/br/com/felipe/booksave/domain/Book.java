@@ -1,8 +1,13 @@
 package br.com.felipe.booksave.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+
 @Entity
 @Table(name = "book")
 public class Book implements Serializable {
@@ -12,11 +17,21 @@ public class Book implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	
 	@Column(name = "title")
+	@NotNull(message = "campo obrigatório")
+    @Size(min = 1, message = "campo obrigatório")
 	private String title;
+	
 	@Column(name = "author")
+	@NotNull(message = "campo obrigatório")
+    @Size(min = 1, message = "campo obrigatório")
 	private String author;
+	
 	@Column(name = "pub_year")
+	@NotNull(message = "campo obrigatório")
+    @Min(value = 1000, message = "precisa ser no entre 1000 e 2200")
+    @Max(value = 2200, message = "precisa ser no entre 1000 e 2200")
 	private int pubYear;
 
 	public Book() {
