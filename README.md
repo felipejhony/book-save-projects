@@ -1,7 +1,7 @@
 
 # Book Save
 
-## Conjunto de projetos de cadastro de livros utilizando métodos diferentes.
+Conjunto de projetos de cadastro de livros utilizando métodos diferentes:
 
 * 01 - utiliza java básico para fazer um CRUD em memória na console
 * 02 - faz o CRUD em arquivo salvo dentro do projeto
