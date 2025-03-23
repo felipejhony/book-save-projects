@@ -7,4 +7,4 @@
 * 02 - faz o CRUD em arquivo salvo dentro do projeto
 * 03 - usa o banco de dados h2
 * 04 - usa h2 e spring para criar uma API REST
-* 05 - utiliza spring e thymeleaf e h2
+* 05 - utiliza spring, thymeleaf e h2
